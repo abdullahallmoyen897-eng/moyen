@@ -1,43 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Fast webpage</title>
-    <style>
-        .centerImage{
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    </style>
+    <title>লোকেশন শেয়ার</title>
 </head>
-<!--that is my fast or 2nd html leaning starting-->
 <body>
-    <h1> HELLO WORD</h1>
-    <Table border="4">
-        <tr><td>Name</td><td>Roll</td><td>section</td></tr>
-        <tr><td>Moyen</td><td>52139</td><td>B-18</td></tr>
-        <tr><td>Siam</td><td>52248</td><td><i class="fa fa-align-center" aria-hidden="true"></i> B-6</td></tr>
-        <tr><td>arisha</td><td>51814</td><td>B-18</td></tr>
-    </Table>
-<a href="https://www.youtube.com/watch?v=HcOc7P5BMi4&t=1359s"><img src="unnamed.webp" class="centerImage"></a>
-<p>seall latter seall latter seall latterseall latterseall latter seall latter seall latter seall latterseall latterseall latter seall latter seall latter seall latterseall latterseall latter seall latter seall latter seall latterseall latterseall latter seall latter seall latter seall latterseall latterseall latter </p>
 
-    
-</body>
-</html>
+    <h1>আপনার লোকেশন শেয়ার করুন</h1>
+    <button onclick="getLocation()">লোকেশন শেয়ার করুন</button>
 
+    <p id="demo"></p>
 
+    <script>
+    var x = document.getElementById("demo");
 
+    function getLocation() {
+        if (navigator.geolocation) {
+            //getCurrentPosition তিনটি প্যারামিটার নিতে পারে: সফল হলে, ব্যর্থ হলে এবং অপশনস।
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else { 
+            x.innerHTML = "আপনার ব্রাউজার জিওলোকেশন সাপোর্ট করে না।";
+        }
+    }
 
+    function showPosition(position) {
+        x.innerHTML = "অক্ষাংশ: " + position.coords.latitude + 
+        "<br>দ্রাঘিমাংশ: " + position.coords.longitude;
+    }
 
-
-
-
-
-
-
+    function showError(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                x.innerHTML = "ব্যবহারকারী লোকেশন রিকোয়েস্ট প্রত্যাখ্যান করেছেন।";
+                break;
+            case error.POSITION_UNAVAILABLE:
+                x.innerHTML = "লোকেশন তথ্য পাওয়া যাচ্ছে না।";
+                break;
+            case error.TIMEOUT:
+                x.innerHTML = "লোকেশন পাওয়ার রিকোয়েস্ট টাইমআউট হয়েছে।";
+                break;
+            case error.UNKNOWN_ERROR:
+                x.innerHTML = "একটি অজানা ত্রুটি ঘটেছে।";
+                break;
+        }
+    }
+    </script>
 
 </body>
 </html>
